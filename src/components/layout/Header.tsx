@@ -2,11 +2,13 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Menu, X, Phone, MessageCircle } from 'lucide-react'
+import { Menu, X, Phone, MessageCircle, User } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 const WA_URL = 'https://api.whatsapp.com/send?phone=554734817707'
+const AREA_CLIENTE_URL = 'https://enet.simob.com.br/login/26bf51ea7122094ad0a4779cb1fd26d4881'
 
 const navLinks = [
   { href: '/imoveis', label: 'Imóveis' },
@@ -20,6 +22,12 @@ const navLinks = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  // Página do imóvel não tem hero/fundo escuro atrás do header, então o
+  // estado inicial "transparente" precisa usar o mesmo visual do estado "scrolled".
+  const isImovelDetail = pathname?.startsWith('/imoveis/') ?? false
+  const solid = scrolled || isImovelDetail
 
   useEffect(() => {
     function onScroll() {
@@ -33,14 +41,14 @@ export function Header() {
     <motion.header
       className="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
       animate={{
-        backgroundColor: scrolled ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
-        boxShadow: scrolled ? '0 1px 20px rgba(0,0,0,0.1)' : 'none',
+        backgroundColor: solid ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
+        boxShadow: solid ? '0 1px 20px rgba(0,0,0,0.1)' : 'none',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-[72px] flex items-center justify-between gap-4">
         {/* Logo */}
         <Link href="/" className="shrink-0">
-          <div className={`rounded-xl overflow-hidden transition-all duration-300 ${scrolled ? 'bg-[#1B4398]' : 'bg-[#1B4398]/90'}`}>
+          <div className={`rounded-xl overflow-hidden transition-all duration-300 ${solid ? 'bg-[#1B4398]' : 'bg-[#1B4398]/90'}`}>
             <Image
               src="/images/logoirineulocacao.png"
               alt="Irineu Locação de Imóveis"
@@ -59,7 +67,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-[#1B4398] ${
-                scrolled ? 'text-[#1E293B]' : 'text-white drop-shadow'
+                solid ? 'text-[#1E293B]' : 'text-white drop-shadow'
               }`}
             >
               {link.label}
@@ -71,10 +79,23 @@ export function Header() {
         <div className="hidden lg:flex items-center gap-3 shrink-0">
           <a
             href="tel:4734817707"
-            className={`flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap ${scrolled ? 'text-[#1E293B]' : 'text-white drop-shadow'}`}
+            className={`flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap ${solid ? 'text-[#1E293B]' : 'text-white drop-shadow'}`}
           >
             <Phone size={15} />
             (47) 3481-7707
+          </a>
+          <a
+            href={AREA_CLIENTE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap border rounded-lg px-3 py-2 ${
+              solid
+                ? 'text-[#1E293B] border-[#1E293B]/20 hover:border-[#1B4398] hover:text-[#1B4398]'
+                : 'text-white border-white/40 hover:border-white hover:bg-white/10 drop-shadow'
+            }`}
+          >
+            <User size={15} />
+            Área do Cliente
           </a>
           <a
             href={WA_URL}
@@ -89,7 +110,7 @@ export function Header() {
 
         {/* Mobile menu */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-[#1E293B]' : 'text-white'}`}>
+          <SheetTrigger className={`lg:hidden p-2 rounded-lg transition-colors ${solid ? 'text-[#1E293B]' : 'text-white'}`}>
             <Menu size={24} />
           </SheetTrigger>
           {/* showCloseButton={false} remove o X automático — usamos nosso próprio no header azul */}
@@ -117,6 +138,15 @@ export function Header() {
                 <a href="tel:4734817707" className="flex items-center gap-2 text-[#1E293B] font-medium py-3 px-4 rounded-lg border hover:bg-gray-50 transition-colors">
                   <Phone size={16} className="text-[#1B4398]" />
                   (47) 3481-7707
+                </a>
+                <a
+                  href={AREA_CLIENTE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[#1E293B] font-medium py-3 px-4 rounded-lg border hover:bg-gray-50 transition-colors"
+                >
+                  <User size={16} className="text-[#1B4398]" />
+                  Área do Cliente
                 </a>
                 <a
                   href={WA_URL}

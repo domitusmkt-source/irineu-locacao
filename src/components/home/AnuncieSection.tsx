@@ -66,22 +66,22 @@ export function AnuncieSection() {
             <Image
               src="/images/chavefundo.png"
               alt="Anuncie seu imóvel com a Irineu Locação"
-              width={400}
-              height={460}
-              className="w-auto object-contain object-bottom"
-              style={{ maxHeight: 420, filter: 'drop-shadow(0 10px 40px rgba(0,0,0,0.4))' }}
+              width={504}
+              height={504}
+              className="w-auto max-w-full object-contain object-bottom"
+              style={{ maxHeight: 504, filter: 'drop-shadow(0 10px 40px rgba(0,0,0,0.4))' }}
             />
           </motion.div>
 
           {/* Imagem mobile — abaixo do texto, centralizada, sem cortar */}
-          <div className="md:hidden flex justify-center py-8">
+          <div className="md:hidden flex justify-center items-end pt-10">
             <Image
               src="/images/chavefundo.png"
               alt="Anuncie seu imóvel com a Irineu Locação"
-              width={260}
-              height={260}
-              className="w-auto object-contain"
-              style={{ maxHeight: 240 }}
+              width={370}
+              height={370}
+              className="w-auto max-w-full object-contain object-bottom"
+              style={{ maxHeight: 370, filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.25))' }}
             />
           </div>
 

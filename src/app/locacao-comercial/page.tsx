@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Building2, ArrowRight } from 'lucide-react'
-import { getImoveisComerciais } from '@/lib/imoveis-fake'
+import { getImoveisComerciais } from '@/lib/api/simob'
 import { CardImovel } from '@/components/imoveis/CardImovel'
 
 export const metadata: Metadata = {
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 const WA_URL = 'https://api.whatsapp.com/send?phone=554734817707&text=Olá! Tenho interesse em imóveis comerciais para locação.'
 
-export default function LocacaoComercialPage() {
-  const imoveis = getImoveisComerciais()
+export default async function LocacaoComercialPage() {
+  const imoveis = await getImoveisComerciais().catch(() => [])
 
   return (
     <div className="min-h-screen bg-[#F4F6F9]">

@@ -128,12 +128,55 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
   body {
     @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+  }
+}
+
+/* Página do imóvel: grid que reordena "Explore a Vizinhança" para depois de
+   "Tenho interesse" apenas no mobile, mantendo o desktop idêntico ao layout atual. */
+.imovel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "main"
+    "side"
+    "explore";
+  row-gap: 2.5rem;
+  column-gap: 2.5rem;
+}
+.imovel-grid > .imovel-main {
+  grid-area: main;
+  min-width: 0;
+}
+.imovel-grid > .imovel-side {
+  grid-area: side;
+}
+.imovel-grid > .imovel-explore {
+  grid-area: explore;
+}
+@media (min-width: 1024px) {
+  .imovel-grid {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    grid-template-areas:
+      "main side"
+      "explore side";
+    row-gap: 0;
+    column-gap: 2.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .imovel-grid {
+    grid-template-columns: minmax(0, 1fr) 24rem;
   }
 }
 

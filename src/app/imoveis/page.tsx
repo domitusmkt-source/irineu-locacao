@@ -4,15 +4,23 @@ import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { SlidersHorizontal, Search, X, ChevronDown } from 'lucide-react'
 import { CardImovel } from '@/components/imoveis/CardImovel'
-import { imoveisFake, filtrarImoveis } from '@/lib/imoveis-fake'
-import { FiltrosImovel, TipoImovel, CategoriaImovel } from '@/types/imovel'
+import { filtrarImoveis } from '@/lib/api/simob/filtro'
+import { FiltrosImovel, Imovel, TipoImovel, CategoriaImovel } from '@/types/imovel'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Input } from '@/components/ui/input'
 
 const ITEMS_PER_PAGE = 12
 
+function labelFromSlug(slug: string): string {
+  return slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+}
+
 function ImoveisContent() {
   const searchParams = useSearchParams()
+
+  const [imoveis, setImoveis] = useState<Imovel[]>([])
+  const [carregando, setCarregando] = useState(true)
+  const [erro, setErro] = useState<string | null>(null)
 
   const [filtros, setFiltros] = useState<FiltrosImovel>({
     tipo: (searchParams.get('tipo') as TipoImovel) || undefined,
@@ -32,13 +40,46 @@ function ImoveisContent() {
     }
   }, [searchParams])
 
+  useEffect(() => {
+    let cancelado = false
+    setCarregando(true)
+    fetch('/api/imoveis')
+      .then((res) => res.json())
+      .then((data: { imoveis: Imovel[]; error?: string }) => {
+        if (cancelado) return
+        setImoveis(data.imoveis || [])
+        setErro(data.error || null)
+      })
+      .catch(() => {
+        if (cancelado) return
+        setImoveis([])
+        setErro('Não foi possível carregar os imóveis no momento.')
+      })
+      .finally(() => {
+        if (!cancelado) setCarregando(false)
+      })
+    return () => {
+      cancelado = true
+    }
+  }, [])
+
+  const tiposDisponiveis = useMemo(() => {
+    const mapa = new Map<string, string>()
+    imoveis.forEach((i) => mapa.set(i.tipo, labelFromSlug(i.tipo)))
+    return Array.from(mapa.entries()).sort((a, b) => a[1].localeCompare(b[1]))
+  }, [imoveis])
+
+  const cidadesDisponiveis = useMemo(() => {
+    return Array.from(new Set(imoveis.map((i) => i.cidade))).sort((a, b) => a.localeCompare(b))
+  }, [imoveis])
+
   const resultado = useMemo(() => {
-    let lista = filtrarImoveis(imoveisFake, { ...filtros, busca: busca || undefined })
+    let lista = filtrarImoveis(imoveis, { ...filtros, busca: busca || undefined })
     if (ordenacao === 'menor-preco') lista = [...lista].sort((a, b) => a.preco - b.preco)
     else if (ordenacao === 'maior-preco') lista = [...lista].sort((a, b) => b.preco - a.preco)
     else lista = [...lista].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     return lista
-  }, [filtros, busca, ordenacao])
+  }, [imoveis, filtros, busca, ordenacao])
 
   const totalPages = Math.ceil(resultado.length / ITEMS_PER_PAGE)
   const paginado = resultado.slice((pagina - 1) * ITEMS_PER_PAGE, pagina * ITEMS_PER_PAGE)
@@ -94,11 +135,9 @@ function ImoveisContent() {
           className={selectClass}
         >
           <option value="">Todos</option>
-          <option value="apartamento">Apartamento</option>
-          <option value="casa">Casa</option>
-          <option value="terreno">Terreno</option>
-          <option value="galpao">Galpão</option>
-          <option value="sala-comercial">Sala Comercial</option>
+          {tiposDisponiveis.map(([slug, label]) => (
+            <option key={slug} value={slug}>{label}</option>
+          ))}
         </select>
       </div>
 
@@ -110,7 +149,7 @@ function ImoveisContent() {
           className={selectClass}
         >
           <option value="">Todas</option>
-          {['Joinville', 'Araquari', 'São Francisco do Sul', 'Jaraguá do Sul', 'Garuva', 'Itapoá', 'Balneário Barra do Sul'].map((c) => (
+          {cidadesDisponiveis.map((c) => (
             <option key={c} value={c}>{c}</option>
           ))}
         </select>
@@ -203,7 +242,17 @@ function ImoveisContent() {
             </div>
 
             {/* Grid */}
-            {paginado.length > 0 ? (
+            {carregando ? (
+              <div className="bg-white rounded-2xl p-12 text-center">
+                <div className="w-8 h-8 border-4 border-[#1B4398] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-gray-400 text-sm">Carregando imóveis...</p>
+              </div>
+            ) : erro ? (
+              <div className="bg-white rounded-2xl p-12 text-center">
+                <p className="text-gray-500 text-lg mb-2">Não foi possível carregar os imóveis agora</p>
+                <p className="text-gray-400 text-sm">Tente novamente em instantes ou fale com a gente pelo WhatsApp.</p>
+              </div>
+            ) : paginado.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {paginado.map((imovel) => (
                   <CardImovel key={imovel.id} imovel={imovel} />

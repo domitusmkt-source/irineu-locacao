@@ -3,22 +3,30 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { MapPin, BedDouble, Car, Maximize2, MessageCircle } from 'lucide-react'
-import { Imovel, TipoImovel } from '@/types/imovel'
+import { Imovel } from '@/types/imovel'
 
-const badgeColors: Record<TipoImovel, string> = {
+const badgeColors: Record<string, string> = {
   apartamento: 'bg-blue-100 text-blue-700',
   casa: 'bg-green-100 text-green-700',
+  'casa-residencial': 'bg-green-100 text-green-700',
+  'casa-comercial': 'bg-teal-100 text-teal-700',
+  kitnet: 'bg-indigo-100 text-indigo-700',
   terreno: 'bg-yellow-100 text-yellow-700',
   galpao: 'bg-orange-100 text-orange-700',
   'sala-comercial': 'bg-purple-100 text-purple-700',
+  comercial: 'bg-gray-200 text-gray-700',
 }
 
-const tipoLabel: Record<TipoImovel, string> = {
+const tipoLabel: Record<string, string> = {
   apartamento: 'Apartamento',
   casa: 'Casa',
+  'casa-residencial': 'Casa',
+  'casa-comercial': 'Casa Comercial',
+  kitnet: 'Kitnet',
   terreno: 'Terreno',
   galpao: 'Galpão',
   'sala-comercial': 'Sala Comercial',
+  comercial: 'Comercial',
 }
 
 interface CardImovelProps {
@@ -44,8 +52,8 @@ export function CardImovel({ imovel }: CardImovelProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-3 left-3">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${badgeColors[imovel.tipo]}`}>
-            {tipoLabel[imovel.tipo]}
+          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${badgeColors[imovel.tipo] ?? 'bg-gray-100 text-gray-700'}`}>
+            {tipoLabel[imovel.tipo] ?? imovel.tipo}
           </span>
         </div>
         {imovel.destaque && (

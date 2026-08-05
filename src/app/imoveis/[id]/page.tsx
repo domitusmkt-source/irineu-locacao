@@ -1,22 +1,31 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { getImovelById, getImoveisSimilares } from '@/lib/imoveis-fake'
+import { getImovelById, getImoveisSimilares } from '@/lib/api/simob'
+import { GaleriaDetalheImovel } from '@/components/imoveis/GaleriaDetalheImovel'
 
 const tipoLabel: Record<string, string> = {
   apartamento: 'Apartamento',
   casa: 'Casa',
+  'casa-residencial': 'Casa',
+  'casa-comercial': 'Casa Comercial',
+  kitnet: 'Kitnet',
   terreno: 'Terreno',
   galpao: 'Galpão',
   'sala-comercial': 'Sala Comercial',
+  comercial: 'Comercial',
 }
 
 const tipoBadgeColor: Record<string, string> = {
   apartamento: 'bg-blue-100 text-blue-800',
   casa: 'bg-green-100 text-green-800',
+  'casa-residencial': 'bg-green-100 text-green-800',
+  'casa-comercial': 'bg-teal-100 text-teal-800',
+  kitnet: 'bg-indigo-100 text-indigo-800',
   terreno: 'bg-yellow-100 text-yellow-800',
   galpao: 'bg-orange-100 text-orange-800',
   'sala-comercial': 'bg-purple-100 text-purple-800',
+  comercial: 'bg-gray-200 text-gray-800',
 }
 
 function formatPreco(preco: number) {
@@ -25,10 +34,10 @@ function formatPreco(preco: number) {
 
 export default async function ImovelPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const imovel = getImovelById(id)
+  const imovel = await getImovelById(id)
   if (!imovel) redirect('/imoveis')
 
-  const similares = getImoveisSimilares(imovel, 3)
+  const similares = await getImoveisSimilares(imovel, 3).catch(() => [])
   const waText = encodeURIComponent(
     `Olá! Tenho interesse no imóvel: ${imovel.titulo} (${imovel.codigoSimob}) - ${imovel.bairro}, ${imovel.cidade}. Poderia me dar mais informações?`
   )
@@ -49,17 +58,12 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
         </div>
       </div>
 
-      {/* Hero */}
-      <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[480px] bg-gray-200">
-        <Image
-          src={imovel.fotos[0]}
-          alt={imovel.titulo}
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+      {/* Hero + galeria */}
+      <GaleriaDetalheImovel
+        fotos={imovel.fotos}
+        titulo={imovel.titulo}
+        alturaClassName="h-[320px] md:h-[540px] lg:h-[500px] lg:mx-auto lg:w-[calc(100%-48px)] lg:max-w-[1100px] lg:rounded-2xl lg:overflow-hidden"
+      >
         <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
           <div>
             <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 ${tipoBadgeColor[imovel.tipo] ?? 'bg-gray-100 text-gray-800'}`}>
@@ -76,27 +80,14 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Galeria adicional */}
-      {imovel.fotos.length > 1 && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-            {imovel.fotos.slice(1).map((foto, i) => (
-              <div key={i} className="relative aspect-square rounded-lg overflow-hidden bg-gray-100">
-                <Image src={foto} alt={`Foto ${i + 2}`} fill className="object-cover" sizes="120px" />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      </GaleriaDetalheImovel>
 
       {/* Conteúdo */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="imovel-grid">
 
           {/* Coluna principal */}
-          <div className="flex-1 min-w-0">
+          <div className="imovel-main">
 
             {/* Preço mobile */}
             <div className="sm:hidden mb-6 bg-[#F4F6F9] rounded-2xl p-4">
@@ -165,39 +156,10 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
               </div>
             )}
 
-            {/* Explore a Vizinhança */}
-            <div className="mb-8 border border-gray-200 rounded-2xl p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-1">Explore a Vizinhança</h2>
-              <p className="text-sm text-gray-500 mb-5">{imovel.bairro}, {imovel.cidade} — SC</p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
-                {[
-                  { label: 'Supermercados', emoji: '🛒' },
-                  { label: 'Escolas', emoji: '🏫' },
-                  { label: 'Farmácias', emoji: '💊' },
-                  { label: 'Bancos', emoji: '🏦' },
-                  { label: 'Transporte público', emoji: '🚌' },
-                  { label: 'Restaurantes', emoji: '🍽️' },
-                ].map((poi) => (
-                  <div key={poi.label} className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2.5 text-sm text-gray-700">
-                    <span>{poi.emoji}</span>
-                    <span>{poi.label}</span>
-                  </div>
-                ))}
-              </div>
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-[#1B4398] hover:underline"
-              >
-                Ver no Google Maps →
-              </a>
-            </div>
-
           </div>
 
           {/* Sidebar */}
-          <div className="lg:w-80 xl:w-96 shrink-0">
+          <div className="imovel-side">
             <div className="lg:sticky lg:top-24 space-y-4">
 
               {/* Preço + contato */}
@@ -274,6 +236,36 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
 
             </div>
           </div>
+
+          {/* Explore a Vizinhança */}
+          <div className="imovel-explore mb-8 border border-gray-200 rounded-2xl p-6">
+            <h2 className="text-lg font-bold text-gray-900 mb-1">Explore a Vizinhança</h2>
+            <p className="text-sm text-gray-500 mb-5">{imovel.bairro}, {imovel.cidade} — SC</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-5">
+              {[
+                { label: 'Supermercados', emoji: '🛒' },
+                { label: 'Escolas', emoji: '🏫' },
+                { label: 'Farmácias', emoji: '💊' },
+                { label: 'Bancos', emoji: '🏦' },
+                { label: 'Transporte público', emoji: '🚌' },
+                { label: 'Restaurantes', emoji: '🍽️' },
+              ].map((poi) => (
+                <div key={poi.label} className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2.5 text-sm text-gray-700">
+                  <span>{poi.emoji}</span>
+                  <span>{poi.label}</span>
+                </div>
+              ))}
+            </div>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-[#1B4398] hover:underline"
+            >
+              Ver no Google Maps →
+            </a>
+          </div>
+
         </div>
       </div>
 
