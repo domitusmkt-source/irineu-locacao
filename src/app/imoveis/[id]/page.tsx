@@ -32,12 +32,17 @@ function formatPreco(preco: number) {
   return preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 })
 }
 
+function formatPrecoDetalhado(valor: number) {
+  return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+}
+
 export default async function ImovelPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const imovel = await getImovelById(id)
   if (!imovel) redirect('/imoveis')
 
   const similares = await getImoveisSimilares(imovel, 3).catch(() => [])
+  const totalEncargos = imovel.encargos.reduce((soma, e) => soma + e.valor, 0)
   const waText = encodeURIComponent(
     `Olá! Tenho interesse no imóvel: ${imovel.titulo} (${imovel.codigoSimob}) - ${imovel.bairro}, ${imovel.cidade}. Poderia me dar mais informações?`
   )
@@ -169,7 +174,26 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
                   {formatPreco(imovel.preco)}
                   <span className="text-base font-normal text-gray-400">/mês</span>
                 </p>
-                <p className="text-xs text-gray-400 mb-5">+ encargos conforme contrato</p>
+                {imovel.encargos.length > 0 ? (
+                  <div className="mb-5">
+                    <div className="space-y-1.5 py-3 border-t border-b border-gray-100">
+                      {imovel.encargos.map((e) => (
+                        <div key={e.label} className="flex items-center justify-between text-xs text-gray-500">
+                          <span>{e.label}</span>
+                          <span className="font-medium text-gray-600">{formatPrecoDetalhado(e.valor)}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between pt-3">
+                      <span className="text-sm font-bold text-gray-900">Total mensal</span>
+                      <span className="text-sm font-extrabold text-[#1B4398]">
+                        {formatPrecoDetalhado(imovel.preco + totalEncargos)}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-xs text-gray-400 mb-5">+ encargos conforme contrato</p>
+                )}
 
                 <a
                   href={waUrl}

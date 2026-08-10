@@ -66,7 +66,7 @@ export function InstitucionalSection() {
                 <span className="text-[#1E293B] font-semibold text-sm">Joinville e Norte SC</span>
               </div>
               <div className="bg-white rounded-xl px-4 py-2.5 border border-gray-100 shadow-sm">
-                <span className="text-[#1E293B] font-semibold text-sm">7 cidades atendidas</span>
+                <span className="text-[#1E293B] font-semibold text-sm">2 cidades atendidas</span>
               </div>
             </div>
           </div>

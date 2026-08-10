@@ -11,6 +11,11 @@ export interface SimobCaracteristica {
   tipo?: number
   idGrupo?: number
   descricaoGrupo?: string
+  /** Presente apenas no endpoint de detalhes: mesmo agrupamento de idGrupo/descricaoGrupo,
+   *  porém aninhado. Grupo id 2 ("Valores") reúne os encargos monetários (IPTU, condomínio etc). */
+  grupo?: { id: number; descricao: string }
+  publicar?: boolean
+  ordem?: number
 }
 
 export interface SimobImagemListagem {

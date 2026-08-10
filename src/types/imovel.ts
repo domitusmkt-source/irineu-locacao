@@ -23,6 +23,8 @@ export interface Imovel {
   vagas?: number
   descricao: string
   caracteristicas: string[]
+  /** Encargos mensais recorrentes (IPTU, condomínio, TLU/TCL etc.) retornados pelo Simob para o imóvel. */
+  encargos: { label: string; valor: number }[]
   fotos: string[]
   destaque: boolean
   latitude?: number

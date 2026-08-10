@@ -1,6 +1,7 @@
 import type { Imovel } from '@/types/imovel'
 import { buildImovelImageUrl } from './image'
 import { extrairCaracteristicas } from './caracteristicas'
+import { extrairEncargos } from './encargos'
 import { classificarCategoria } from './categorias'
 import { formatCep, slugify, stripHtml, toTitleCasePtBr } from './parse'
 import type { SimobImovelDetalhe, SimobImovelListagem } from './types'
@@ -49,6 +50,7 @@ export function mapListagemToImovel(item: SimobImovelListagem): Imovel {
     vagas,
     descricao: stripHtml(item.descricaoImovel),
     caracteristicas: diferenciais,
+    encargos: [],
     fotos: imagensSource.length > 0 ? imagensSource : [FOTO_PLACEHOLDER],
     destaque: item.exclusividade === '1',
     codigoSimob: item.codigo,
@@ -89,6 +91,7 @@ export function mapDetalheToImovel(item: SimobImovelDetalhe): Imovel {
     vagas,
     descricao: stripHtml(item.descricao),
     caracteristicas: diferenciais,
+    encargos: extrairEncargos(item.caracteristicas),
     fotos: imagensSource.length > 0 ? imagensSource : [FOTO_PLACEHOLDER],
     destaque: false,
     codigoSimob: item.codigo,

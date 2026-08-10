@@ -7,12 +7,13 @@ import { ComercialSection } from '@/components/home/ComercialSection'
 import { AnuncieSection } from '@/components/home/AnuncieSection'
 import { InstitucionalSection } from '@/components/home/InstitucionalSection'
 import { CTAFinalSection } from '@/components/home/CTAFinalSection'
-import { getImoveisDestaque } from '@/lib/api/simob'
+import { getImoveisDestaque, getImoveisResidenciais } from '@/lib/api/simob'
 
 export default async function HomePage() {
   // Se a API Simob estiver indisponível, a seção de destaques simplesmente
   // renderiza sem cards em vez de quebrar a Home inteira.
   const destaque = await getImoveisDestaque().catch(() => [])
+  const residenciais = await getImoveisResidenciais().catch(() => [])
 
   return (
     <>
@@ -20,7 +21,7 @@ export default async function HomePage() {
       <TrustBar />
       <TiposImovelSection />
       <DestaquesSection imoveis={destaque} />
-      <ResidencialSection />
+      <ResidencialSection totalResidenciais={residenciais.length} />
       <ComercialSection />
       <AnuncieSection />
       <InstitucionalSection />

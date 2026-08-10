@@ -8,8 +8,8 @@ gsap.registerPlugin(ScrollTrigger)
 
 const stats = [
   { icon: Award, value: '25+', label: 'Anos de experiência', color: 'text-[#1B4398]' },
-  { icon: Building2, value: '500+', label: 'Imóveis locados', color: 'text-[#CC2929]' },
-  { icon: MapPin, value: '7', label: 'Cidades atendidas', color: 'text-[#1B4398]' },
+  { icon: Building2, value: '800+', label: 'Imóveis locados', color: 'text-[#CC2929]' },
+  { icon: MapPin, value: '2', label: 'Cidades atendidas', color: 'text-[#1B4398]' },
   { icon: ShieldCheck, value: 'CRECI 2959J', label: 'Certificação ativa', color: 'text-[#CC2929]' },
 ]
 

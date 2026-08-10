@@ -16,7 +16,12 @@ const benefits = [
   'Atendimento personalizado para sua família',
 ]
 
-export function ResidencialSection() {
+interface ResidencialSectionProps {
+  /** Quantidade real de imóveis residenciais disponíveis, vinda do Simob. */
+  totalResidenciais?: number
+}
+
+export function ResidencialSection({ totalResidenciais }: ResidencialSectionProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -49,7 +54,9 @@ export function ResidencialSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0D2B6B]/40 to-transparent" />
             <div className="absolute bottom-4 left-4 bg-white rounded-xl px-4 py-2 shadow">
-              <p className="text-[#1B4398] font-bold text-sm">+120 imóveis residenciais</p>
+              <p className="text-[#1B4398] font-bold text-sm">
+                {totalResidenciais ? `+${totalResidenciais} imóveis residenciais` : 'Diversos imóveis residenciais'}
+              </p>
               <p className="text-gray-500 text-xs">disponíveis agora</p>
             </div>
           </div>

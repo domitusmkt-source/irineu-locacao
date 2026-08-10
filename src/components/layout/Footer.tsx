@@ -30,7 +30,7 @@ export function Footer() {
       <div className="bg-[#1B4398] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-xl font-bold">Pronto para encontrar seu imóvel ideal?</p>
+            <p className="text-xl font-bold">Encontre seu imóvel ideal</p>
             <p className="text-blue-200 text-sm mt-1">Nossa equipe está pronta para ajudar você.</p>
           </div>
           <div className="flex gap-3">
@@ -128,7 +128,17 @@ export function Footer() {
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <MapPin size={16} className="text-blue-300 mt-0.5 shrink-0" />
-              <p className="text-blue-200 text-sm">Rua Nove de Março, 277 - Centro, Joinville - SC</p>
+              <p className="text-blue-200 text-sm">
+                <span className="block font-semibold text-white/90">Joinville</span>
+                R. Nove de Março, 317 - Ed. Le Pont - Centro, Joinville - SC
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <MapPin size={16} className="text-blue-300 mt-0.5 shrink-0" />
+              <p className="text-blue-200 text-sm">
+                <span className="block font-semibold text-white/90">Araquari</span>
+                Rodovia SC-418, 6553 - Itinga, Araquari - SC
+              </p>
             </div>
             <div className="flex items-center gap-3">
               <Phone size={16} className="text-blue-300 shrink-0" />
@@ -145,8 +155,8 @@ export function Footer() {
           </div>
           <div className="mt-5 pt-5 border-t border-white/10">
             <p className="text-blue-300 text-xs font-semibold mb-1">Horário de Atendimento</p>
-            <p className="text-blue-200 text-xs">Seg–Sex: 08h–18h</p>
-            <p className="text-blue-200 text-xs">Sáb: 08h–12h</p>
+            <p className="text-blue-200 text-xs">Seg–Sex: 08h às 18h</p>
+            <p className="text-blue-200 text-xs">Sáb (plantão comercial): 08:30h às 12h</p>
           </div>
         </div>
       </div>

@@ -35,11 +35,6 @@ export function BuscaHero() {
         <option value="">Cidade</option>
         <option value="Joinville">Joinville</option>
         <option value="Araquari">Araquari</option>
-        <option value="São Francisco do Sul">São Francisco do Sul</option>
-        <option value="Jaraguá do Sul">Jaraguá do Sul</option>
-        <option value="Garuva">Garuva</option>
-        <option value="Itapoá">Itapoá</option>
-        <option value="Balneário Barra do Sul">Balneário Barra do Sul</option>
       </select>
 
       <select value={preco} onChange={(e) => setPreco(e.target.value)} className={selectClass} aria-label="Faixa de preço">
