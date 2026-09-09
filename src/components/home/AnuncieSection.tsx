@@ -14,7 +14,7 @@ const beneficios = [
 
 export function AnuncieSection() {
   return (
-    <section className="bg-[#0D2B6B]" id="anuncie">
+    <section className="bg-[#0D2853]" id="anuncie">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 items-end">
 

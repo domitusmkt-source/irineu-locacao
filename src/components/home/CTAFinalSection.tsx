@@ -3,20 +3,19 @@ import { Search, MessageCircle } from 'lucide-react'
 
 export function CTAFinalSection() {
   return (
-    <section className="py-20 bg-gradient-to-br from-[#0D2B6B] to-[#1B4398]" id="contato">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center text-white">
-        <p className="text-blue-200 text-sm font-bold uppercase tracking-widest mb-4">Encontre seu próximo endereço</p>
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+    <section className="py-28 md:py-36 bg-gradient-to-br from-[#0D2853] to-[#1C3E77]" id="contato">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center text-white">
+        <h2 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
           Pronto para{' '}
-          <span className="text-[#FF6B6B]">MUDAR?</span>
+          <span className="text-[#E32618]">MUDAR?</span>
         </h2>
-        <p className="text-blue-200 text-lg mb-10 leading-relaxed">
-          Nossa equipe está pronta para ajudar você a encontrar o imóvel perfeito. Seja para morar ou para o seu negócio — estamos aqui.
+        <p className="text-blue-200 text-base mb-12">
+          Encontre seu próximo imóvel com a Irineu.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/imoveis"
-            className="flex items-center justify-center gap-2 bg-white text-[#1B4398] font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors"
+            className="flex items-center justify-center gap-2 bg-white text-[#1C3E77] font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors"
           >
             <Search size={20} />
             Ver todos os imóveis
@@ -31,9 +30,6 @@ export function CTAFinalSection() {
             Falar com consultor
           </a>
         </div>
-        <p className="text-blue-300 text-xs mt-8">
-          Atendemos Seg–Sex das 08h às 18h e Sáb (plantão comercial) das 08:30h às 12h • (47) 3481-7707
-        </p>
       </div>
     </section>
   )

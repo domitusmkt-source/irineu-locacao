@@ -5,17 +5,7 @@ import { motion } from 'framer-motion'
 import { MapPin, BedDouble, Car, Maximize2, MessageCircle } from 'lucide-react'
 import { Imovel } from '@/types/imovel'
 
-const badgeColors: Record<string, string> = {
-  apartamento: 'bg-blue-100 text-blue-700',
-  casa: 'bg-green-100 text-green-700',
-  'casa-residencial': 'bg-green-100 text-green-700',
-  'casa-comercial': 'bg-teal-100 text-teal-700',
-  kitnet: 'bg-indigo-100 text-indigo-700',
-  terreno: 'bg-yellow-100 text-yellow-700',
-  galpao: 'bg-orange-100 text-orange-700',
-  'sala-comercial': 'bg-purple-100 text-purple-700',
-  comercial: 'bg-gray-200 text-gray-700',
-}
+const TIPO_BADGE_CLASS = 'bg-[#1C3E77] text-white'
 
 const tipoLabel: Record<string, string> = {
   apartamento: 'Apartamento',
@@ -52,13 +42,13 @@ export function CardImovel({ imovel }: CardImovelProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-3 left-3">
-          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${badgeColors[imovel.tipo] ?? 'bg-gray-100 text-gray-700'}`}>
+          <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${TIPO_BADGE_CLASS}`}>
             {tipoLabel[imovel.tipo] ?? imovel.tipo}
           </span>
         </div>
         {imovel.destaque && (
           <div className="absolute top-3 right-3">
-            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#CC2929] text-white">Destaque</span>
+            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#E32618] text-white">Destaque</span>
           </div>
         )}
       </Link>
@@ -66,12 +56,12 @@ export function CardImovel({ imovel }: CardImovelProps) {
       {/* Info */}
       <div className="flex flex-col flex-1 p-4 gap-3">
         <div>
-          <p className="text-xl font-bold text-[#1B4398]">
+          <p className="text-xl font-bold text-[#1C3E77]">
             R$ {imovel.preco.toLocaleString('pt-BR')}
             <span className="text-sm font-normal text-gray-500">/mês</span>
           </p>
           <Link href={`/imoveis/${imovel.id}`}>
-            <h3 className="font-semibold text-[#1E293B] mt-1 hover:text-[#1B4398] transition-colors line-clamp-2">
+            <h3 className="font-semibold text-[#1E293B] mt-1 hover:text-[#1C3E77] transition-colors line-clamp-2">
               {imovel.titulo}
             </h3>
           </Link>
@@ -105,7 +95,7 @@ export function CardImovel({ imovel }: CardImovelProps) {
         <div className="flex gap-2 mt-auto">
           <Link
             href={`/imoveis/${imovel.id}`}
-            className="flex-1 bg-[#1B4398] hover:bg-[#0D2B6B] text-white text-sm font-semibold py-2.5 rounded-lg text-center transition-colors"
+            className="flex-1 bg-[#1C3E77] hover:bg-[#0D2853] text-white text-sm font-semibold py-2.5 rounded-lg text-center transition-colors"
           >
             Ver detalhes
           </Link>

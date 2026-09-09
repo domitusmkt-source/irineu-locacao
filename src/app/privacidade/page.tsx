@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function PrivacidadePage() {
   return (
-    <div className="min-h-screen bg-white pt-24">
+    <div className="min-h-screen bg-white pt-24 md:pt-28">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
         <h1 className="text-3xl font-extrabold text-[#1E293B] mb-2">Política de Privacidade</h1>
         <p className="text-gray-500 mb-8 text-sm">Última atualização: Janeiro de 2025</p>
@@ -16,7 +16,7 @@ export default function PrivacidadePage() {
           <section>
             <h2 className="text-xl font-bold text-[#1E293B] mb-3">1. Quem somos</h2>
             <p className="text-gray-600 leading-relaxed">
-              A <strong>Irineu Locação de Imóveis</strong> (CRECI 2959J), com sede na Rua Nove de Março, 277 - Centro, Joinville - SC, é a controladora dos dados pessoais coletados por meio deste site. Estamos comprometidos com a proteção dos seus dados em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018).
+              A <strong>Irineu Locação de Imóveis</strong> (CRECI 11975J), com sede na Rua Nove de Março, 277 - Centro, Joinville - SC, é a controladora dos dados pessoais coletados por meio deste site. Estamos comprometidos com a proteção dos seus dados em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018).
             </p>
           </section>
 

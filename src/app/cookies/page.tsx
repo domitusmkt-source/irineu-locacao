@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function CookiesPage() {
   return (
-    <div className="min-h-screen bg-white pt-24">
+    <div className="min-h-screen bg-white pt-24 md:pt-28">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
         <h1 className="text-3xl font-extrabold text-[#1E293B] mb-2">Política de Cookies</h1>
         <p className="text-gray-500 mb-8 text-sm">Última atualização: Janeiro de 2025</p>
@@ -65,9 +65,9 @@ export default function CookiesPage() {
             <h2 className="text-xl font-bold text-[#1E293B] mb-3">Mais informações</h2>
             <p className="text-gray-600 leading-relaxed">
               Para saber mais sobre como tratamos seus dados pessoais, consulte nossa{' '}
-              <Link href="/privacidade" className="text-[#1B4398] underline">Política de Privacidade</Link>.
+              <Link href="/privacidade" className="text-[#1C3E77] underline">Política de Privacidade</Link>.
               Em caso de dúvidas, entre em contato pelo e-mail{' '}
-              <a href="mailto:privacidade@irineulocacao.com.br" className="text-[#1B4398] underline">
+              <a href="mailto:privacidade@irineulocacao.com.br" className="text-[#1C3E77] underline">
                 privacidade@irineulocacao.com.br
               </a>
               .

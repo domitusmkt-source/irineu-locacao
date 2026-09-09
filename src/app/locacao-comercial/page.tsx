@@ -21,7 +21,7 @@ export default async function LocacaoComercialPage() {
   return (
     <div className="min-h-screen bg-[#F4F6F9]">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-[#0D2B6B] to-[#1B4398] pt-24 pb-12">
+      <div className="bg-gradient-to-br from-[#0D2853] to-[#1C3E77] pt-24 md:pt-28 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
             <Link href="/" className="hover:text-white transition-colors">Início</Link>
@@ -62,7 +62,7 @@ export default async function LocacaoComercialPage() {
           </p>
           <Link
             href="/imoveis"
-            className="text-[#1B4398] text-sm font-semibold flex items-center gap-1 hover:underline"
+            className="text-[#1C3E77] text-sm font-semibold flex items-center gap-1 hover:underline"
           >
             Ver todos <ArrowRight size={14} />
           </Link>
@@ -77,14 +77,14 @@ export default async function LocacaoComercialPage() {
         ) : (
           <div className="text-center py-16">
             <p className="text-gray-400 text-lg mb-4">Nenhum imóvel comercial disponível no momento.</p>
-            <Link href="/imoveis" className="text-[#1B4398] font-semibold hover:underline">
+            <Link href="/imoveis" className="text-[#1C3E77] font-semibold hover:underline">
               Ver todos os imóveis
             </Link>
           </div>
         )}
 
         {/* CTA */}
-        <div className="mt-12 bg-[#1B4398] rounded-2xl p-8 text-center text-white">
+        <div className="mt-12 bg-[#1C3E77] rounded-2xl p-8 text-center text-white">
           <h2 className="text-xl font-extrabold mb-2">Precisa de um imóvel comercial personalizado?</h2>
           <p className="text-blue-200 text-sm mb-5">
             Temos acesso a imóveis exclusivos. Nossa equipe pode encontrar o espaço ideal para o seu negócio.

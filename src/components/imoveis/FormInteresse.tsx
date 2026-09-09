@@ -79,18 +79,18 @@ export function FormInteresse({ imovelId, imovelTitulo }: FormInteresseProps) {
           type="checkbox"
           checked={lgpd}
           onChange={(e) => setLgpd(e.target.checked)}
-          className="mt-0.5 accent-[#1B4398]"
+          className="mt-0.5 accent-[#1C3E77]"
           aria-label="Aceitar política de privacidade"
         />
         <span className="text-xs text-gray-500">
           Li e concordo com a{' '}
-          <a href="/privacidade" target="_blank" className="text-[#1B4398] underline">Política de Privacidade</a>
+          <a href="/privacidade" target="_blank" className="text-[#1C3E77] underline">Política de Privacidade</a>
         </span>
       </label>
-      {erro && <p role="alert" className="text-[#CC2929] text-xs">{erro}</p>}
+      {erro && <p role="alert" className="text-[#E32618] text-xs">{erro}</p>}
       <button
         type="submit"
-        className="w-full bg-[#1B4398] hover:bg-[#0D2B6B] text-white font-semibold py-3 rounded-xl transition-colors text-sm"
+        className="w-full bg-[#1C3E77] hover:bg-[#0D2853] text-white font-semibold py-3 rounded-xl transition-colors text-sm"
       >
         Enviar interesse
       </button>

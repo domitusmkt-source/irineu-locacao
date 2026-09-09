@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: '%s | Irineu Locação',
   },
   description:
-    'Encontre apartamentos, casas, salas comerciais e galpões para alugar em Joinville, Araquari, São Francisco do Sul e região Norte de Santa Catarina. Irineu Locação de Imóveis - CRECI 2959J.',
+    'Encontre apartamentos, casas, salas comerciais e galpões para alugar em Joinville, Araquari, São Francisco do Sul e região Norte de Santa Catarina. Irineu Locação de Imóveis - CRECI 11975J.',
   keywords: [
     'imóveis para alugar',
     'locação joinville',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Irineu Locação de Imóveis' }],
   openGraph: {
     title: 'Irineu Locação de Imóveis | Joinville e Norte de SC',
-    description: 'Os melhores imóveis para alugar em Santa Catarina. CRECI 2959J.',
+    description: 'Os melhores imóveis para alugar em Santa Catarina. CRECI 11975J.',
     images: [{ url: '/images/predioirienu.png', width: 1200, height: 630, alt: 'Irineu Locação de Imóveis' }],
     locale: 'pt_BR',
     type: 'website',
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={inter.variable}>
       <head>
-        <meta name="theme-color" content="#1B4398" />
+        <meta name="theme-color" content="#1C3E77" />
       </head>
       <body className="antialiased">
         <LenisProvider>

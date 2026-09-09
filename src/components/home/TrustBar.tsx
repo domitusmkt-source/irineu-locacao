@@ -7,10 +7,10 @@ import { Building2, Award, MapPin, ShieldCheck } from 'lucide-react'
 gsap.registerPlugin(ScrollTrigger)
 
 const stats = [
-  { icon: Award, value: '25+', label: 'Anos de experiência', color: 'text-[#1B4398]' },
-  { icon: Building2, value: '800+', label: 'Imóveis locados', color: 'text-[#CC2929]' },
-  { icon: MapPin, value: '2', label: 'Cidades atendidas', color: 'text-[#1B4398]' },
-  { icon: ShieldCheck, value: 'CRECI 2959J', label: 'Certificação ativa', color: 'text-[#CC2929]' },
+  { icon: Award, value: '25+', label: 'Anos de experiência', color: 'text-[#1C3E77]' },
+  { icon: Building2, value: '800+', label: 'Imóveis locados', color: 'text-[#E32618]' },
+  { icon: MapPin, value: '2', label: 'Cidades atendidas', color: 'text-[#1C3E77]' },
+  { icon: ShieldCheck, value: 'CRECI 11975J', label: 'Certificação ativa', color: 'text-[#E32618]' },
 ]
 
 export function TrustBar() {

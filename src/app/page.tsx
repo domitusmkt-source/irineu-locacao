@@ -7,6 +7,7 @@ import { ComercialSection } from '@/components/home/ComercialSection'
 import { AnuncieSection } from '@/components/home/AnuncieSection'
 import { InstitucionalSection } from '@/components/home/InstitucionalSection'
 import { CTAFinalSection } from '@/components/home/CTAFinalSection'
+import { SloganSection } from '@/components/home/SloganSection'
 import { getImoveisDestaque, getImoveisResidenciais } from '@/lib/api/simob'
 
 export default async function HomePage() {
@@ -23,6 +24,7 @@ export default async function HomePage() {
       <DestaquesSection imoveis={destaque} />
       <ResidencialSection totalResidenciais={residenciais.length} />
       <ComercialSection />
+      <SloganSection />
       <AnuncieSection />
       <InstitucionalSection />
       <CTAFinalSection />

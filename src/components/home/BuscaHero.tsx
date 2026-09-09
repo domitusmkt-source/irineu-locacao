@@ -18,7 +18,7 @@ export function BuscaHero() {
   }
 
   const selectClass =
-    'flex-1 min-w-0 bg-white border-0 text-[#1E293B] text-sm font-medium px-4 py-3.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1B4398] appearance-none cursor-pointer'
+    'flex-1 min-w-0 bg-white border-0 text-[#1E293B] text-sm font-medium px-4 py-3.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1C3E77] appearance-none cursor-pointer'
 
   return (
     <div className="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-4 flex flex-col md:flex-row gap-3 max-w-3xl">
@@ -48,7 +48,7 @@ export function BuscaHero() {
 
       <button
         onClick={handleBuscar}
-        className="flex items-center justify-center gap-2 bg-[#1B4398] hover:bg-[#0D2B6B] text-white font-bold px-7 py-3.5 rounded-xl transition-colors shrink-0 text-sm"
+        className="flex items-center justify-center gap-2 bg-[#1C3E77] hover:bg-[#0D2853] text-white font-bold px-7 py-3.5 rounded-xl transition-colors shrink-0 text-sm"
       >
         <Search size={18} />
         Buscar Imóvel

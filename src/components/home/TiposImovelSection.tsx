@@ -45,13 +45,13 @@ export function TiposImovelSection() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
           <div>
-            <p className="text-[#CC2929] text-xs font-bold uppercase tracking-widest mb-3">O que procura?</p>
+            <p className="text-[#E32618] text-xs font-bold uppercase tracking-widest mb-3">O que procura?</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-[#1E293B] leading-tight max-w-xl">
               Encontre aqui seu tipo de imóvel para locação
             </h2>
           </div>
           <motion.div
-            className="h-1 w-20 bg-[#CC2929] rounded-full shrink-0 mb-1"
+            className="h-1 w-20 bg-[#E32618] rounded-full shrink-0 mb-1"
             initial={{ scaleX: 0, originX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}

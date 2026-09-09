@@ -90,13 +90,13 @@ function ImoveisContent() {
     setPagina(1)
   }
 
-  const selectClass = 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-[#1E293B] focus:outline-none focus:ring-2 focus:ring-[#1B4398] bg-white appearance-none'
+  const selectClass = 'w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-[#1E293B] focus:outline-none focus:ring-2 focus:ring-[#1C3E77] bg-white appearance-none'
 
   const FiltrosSidebar = () => (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-between">
         <h3 className="font-bold text-[#1E293B]">Filtros</h3>
-        <button onClick={limparFiltros} className="text-sm text-[#CC2929] hover:underline flex items-center gap-1">
+        <button onClick={limparFiltros} className="text-sm text-[#E32618] hover:underline flex items-center gap-1">
           <X size={14} /> Limpar
         </button>
       </div>
@@ -190,7 +190,7 @@ function ImoveisContent() {
   return (
     <div className="min-h-screen bg-[#F4F6F9]">
       {/* Page header */}
-      <div className="bg-[#1B4398] pt-24 pb-10">
+      <div className="bg-[#1C3E77] pt-24 md:pt-28 pb-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h1 className="text-3xl font-extrabold text-white mb-2">Imóveis para Alugar</h1>
           <p className="text-blue-200">Encontre o imóvel ideal em Santa Catarina</p>
@@ -211,12 +211,12 @@ function ImoveisContent() {
             {/* Toolbar */}
             <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
               <p className="text-[#1E293B] font-semibold">
-                <span className="text-[#1B4398] font-bold">{resultado.length}</span> imóveis encontrados
+                <span className="text-[#1C3E77] font-bold">{resultado.length}</span> imóveis encontrados
               </p>
               <div className="flex items-center gap-3">
                 {/* Mobile filter button */}
                 <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-                  <SheetTrigger className="lg:hidden flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-[#1E293B] shadow-sm hover:border-[#1B4398] transition-colors">
+                  <SheetTrigger className="lg:hidden flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-[#1E293B] shadow-sm hover:border-[#1C3E77] transition-colors">
                     <SlidersHorizontal size={16} />
                     Filtros
                   </SheetTrigger>
@@ -230,7 +230,7 @@ function ImoveisContent() {
                   <select
                     value={ordenacao}
                     onChange={(e) => { setOrdenacao(e.target.value); setPagina(1) }}
-                    className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-medium text-[#1E293B] shadow-sm appearance-none pr-8 focus:outline-none focus:ring-2 focus:ring-[#1B4398]"
+                    className="bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-medium text-[#1E293B] shadow-sm appearance-none pr-8 focus:outline-none focus:ring-2 focus:ring-[#1C3E77]"
                   >
                     <option value="recente">Mais recente</option>
                     <option value="menor-preco">Menor preço</option>
@@ -244,7 +244,7 @@ function ImoveisContent() {
             {/* Grid */}
             {carregando ? (
               <div className="bg-white rounded-2xl p-12 text-center">
-                <div className="w-8 h-8 border-4 border-[#1B4398] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <div className="w-8 h-8 border-4 border-[#1C3E77] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                 <p className="text-gray-400 text-sm">Carregando imóveis...</p>
               </div>
             ) : erro ? (
@@ -262,7 +262,7 @@ function ImoveisContent() {
               <div className="bg-white rounded-2xl p-12 text-center">
                 <p className="text-gray-400 text-lg mb-2">Nenhum imóvel encontrado</p>
                 <p className="text-gray-400 text-sm mb-6">Tente ajustar os filtros ou{' '}
-                  <button onClick={limparFiltros} className="text-[#1B4398] underline">limpe os filtros</button>
+                  <button onClick={limparFiltros} className="text-[#1C3E77] underline">limpe os filtros</button>
                 </p>
               </div>
             )}
@@ -275,7 +275,7 @@ function ImoveisContent() {
                     key={p}
                     onClick={() => { setPagina(p); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
                     className={`w-10 h-10 rounded-xl font-semibold text-sm transition-colors ${
-                      p === pagina ? 'bg-[#1B4398] text-white' : 'bg-white text-[#1E293B] border border-gray-200 hover:border-[#1B4398]'
+                      p === pagina ? 'bg-[#1C3E77] text-white' : 'bg-white text-[#1E293B] border border-gray-200 hover:border-[#1C3E77]'
                     }`}
                   >
                     {p}
@@ -292,7 +292,7 @@ function ImoveisContent() {
 
 export default function ImoveisPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#F4F6F9] pt-24 flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#1B4398] border-t-transparent rounded-full animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#F4F6F9] pt-24 md:pt-28 flex items-center justify-center"><div className="w-8 h-8 border-4 border-[#1C3E77] border-t-transparent rounded-full animate-spin" /></div>}>
       <ImoveisContent />
     </Suspense>
   )

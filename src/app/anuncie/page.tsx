@@ -48,13 +48,13 @@ export default function AnunciePage() {
     setEnviado(true)
   }
 
-  const inputClass = 'w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1E293B] focus:outline-none focus:ring-2 focus:ring-[#1B4398] bg-white'
+  const inputClass = 'w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-[#1E293B] focus:outline-none focus:ring-2 focus:ring-[#1C3E77] bg-white'
   const labelClass = 'block text-sm font-semibold text-gray-700 mb-1.5'
 
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <div className="relative bg-[#1B4398] pt-24 pb-16 overflow-hidden">
+      <div className="relative bg-[#1C3E77] pt-24 md:pt-28 pb-16 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <Image src="/images/predioirienu.png" alt="" fill className="object-cover" />
         </div>
@@ -74,8 +74,8 @@ export default function AnunciePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {beneficios.map(({ icon: Icon, titulo, desc }) => (
               <div key={titulo} className="bg-white rounded-2xl p-6 shadow-sm flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#1B4398]/10 rounded-xl flex items-center justify-center shrink-0">
-                  <Icon size={24} className="text-[#1B4398]" />
+                <div className="w-12 h-12 bg-[#1C3E77]/10 rounded-xl flex items-center justify-center shrink-0">
+                  <Icon size={24} className="text-[#1C3E77]" />
                 </div>
                 <div>
                   <h3 className="font-bold text-[#1E293B] mb-1">{titulo}</h3>
@@ -98,7 +98,7 @@ export default function AnunciePage() {
               <CheckCircle2 size={48} className="text-green-500 mx-auto mb-3" />
               <h3 className="font-bold text-[#1E293B] text-xl mb-2">Mensagem enviada!</h3>
               <p className="text-gray-600 mb-6">Em breve nossa equipe entrará em contato.</p>
-              <Link href="/" className="bg-[#1B4398] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0D2B6B] transition-colors">
+              <Link href="/" className="bg-[#1C3E77] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0D2853] transition-colors">
                 Voltar ao início
               </Link>
             </div>
@@ -168,7 +168,7 @@ export default function AnunciePage() {
                   type="file"
                   accept="image/*"
                   multiple
-                  className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#1B4398] file:text-white hover:file:bg-[#0D2B6B] file:cursor-pointer"
+                  className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#1C3E77] file:text-white hover:file:bg-[#0D2853] file:cursor-pointer"
                 />
                 <p className="text-xs text-gray-400 mt-1">As fotos serão enviadas por e-mail ou WhatsApp. Máx. 10 imagens.</p>
               </div>
@@ -179,11 +179,11 @@ export default function AnunciePage() {
                     type="checkbox"
                     checked={form.lgpd}
                     onChange={(e) => set('lgpd', e.target.checked)}
-                    className="mt-0.5 accent-[#1B4398]"
+                    className="mt-0.5 accent-[#1C3E77]"
                   />
                   <span className="text-sm text-gray-600">
                     Li e concordo com a{' '}
-                    <Link href="/privacidade" target="_blank" className="text-[#1B4398] underline">Política de Privacidade</Link> *
+                    <Link href="/privacidade" target="_blank" className="text-[#1C3E77] underline">Política de Privacidade</Link> *
                   </span>
                 </label>
                 <label className="flex items-start gap-2 cursor-pointer">
@@ -191,18 +191,18 @@ export default function AnunciePage() {
                     type="checkbox"
                     checked={form.whatsapp}
                     onChange={(e) => set('whatsapp', e.target.checked)}
-                    className="mt-0.5 accent-[#1B4398]"
+                    className="mt-0.5 accent-[#1C3E77]"
                   />
                   <span className="text-sm text-gray-600">Autorizo o contato por WhatsApp</span>
                 </label>
               </div>
 
-              {erro && <p role="alert" className="text-[#CC2929] text-sm">{erro}</p>}
+              {erro && <p role="alert" className="text-[#E32618] text-sm">{erro}</p>}
 
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 bg-[#1B4398] hover:bg-[#0D2B6B] text-white font-bold py-3.5 rounded-xl transition-colors"
+                  className="flex-1 bg-[#1C3E77] hover:bg-[#0D2853] text-white font-bold py-3.5 rounded-xl transition-colors"
                 >
                   Enviar por e-mail
                 </button>

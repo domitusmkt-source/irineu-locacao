@@ -29,26 +29,23 @@ export function HeroSection() {
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0D2B6B]/88 via-[#1B4398]/65 to-[#0D2B6B]/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D2853]/88 via-[#1C3E77]/65 to-[#0D2853]/40" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-16 text-white text-center md:text-left">
         <div ref={textRef}>
           <div className="hero-anim inline-block bg-white/15 backdrop-blur-sm border border-white/20 text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-5 tracking-wider">
-            Irineu Locação de Imóveis • CRECI 2959J
+            Irineu Locação de Imóveis • CRECI 11975J
           </div>
 
           <h1 className="hero-anim text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 max-w-3xl">
             Seu próximo endereço{' '}
-            <span className="text-red-400">começa aqui</span>
+            <span className="text-[#FF4A38]">começa aqui</span>
           </h1>
 
-          <p className="hero-anim text-lg sm:text-xl text-blue-100 mb-3 max-w-2xl">
+          <p className="hero-anim text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl">
             Encontre o imóvel ideal para morar ou para o seu negócio em Santa Catarina.
-          </p>
-          <p className="hero-anim text-base text-blue-200 mb-10 max-w-xl">
-            Seu negócio pode começar aqui. Mais de 25 anos conectando pessoas aos melhores imóveis da região.
           </p>
 
           <div className="hero-anim">

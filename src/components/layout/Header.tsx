@@ -45,19 +45,19 @@ export function Header() {
         boxShadow: solid ? '0 1px 20px rgba(0,0,0,0.1)' : 'none',
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-[72px] flex items-center justify-between gap-4">
-        {/* Logo */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-24 md:h-28 flex items-center justify-between gap-4">
+        {/* Logo — versão colorida sobre header sólido (branco), alto-contraste sobre o hero transparente.
+            Assets recortados no conteúdo real (sem a margem transparente do PNG original) para a marca
+            ocupar de fato a altura reservada. */}
         <Link href="/" className="shrink-0">
-          <div className={`rounded-xl overflow-hidden transition-all duration-300 ${solid ? 'bg-[#1B4398]' : 'bg-[#1B4398]/90'}`}>
-            <Image
-              src="/images/logoirineulocacao.png"
-              alt="Irineu Locação de Imóveis"
-              width={130}
-              height={50}
-              className="h-10 md:h-12 w-auto"
-              priority
-            />
-          </div>
+          <Image
+            src={solid ? '/images/logo-irineu.png' : '/images/logo-irineu-branco.png'}
+            alt="Irineu Locação de Imóveis"
+            width={617}
+            height={531}
+            className="h-20 md:h-24 w-auto transition-opacity duration-300"
+            priority
+          />
         </Link>
 
         {/* Nav desktop */}
@@ -66,7 +66,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-[#1B4398] ${
+              className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-[#1C3E77] ${
                 solid ? 'text-[#1E293B]' : 'text-white drop-shadow'
               }`}
             >
@@ -90,7 +90,7 @@ export function Header() {
             rel="noopener noreferrer"
             className={`flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap border rounded-lg px-3 py-2 ${
               solid
-                ? 'text-[#1E293B] border-[#1E293B]/20 hover:border-[#1B4398] hover:text-[#1B4398]'
+                ? 'text-[#1E293B] border-[#1E293B]/20 hover:border-[#1C3E77] hover:text-[#1C3E77]'
                 : 'text-white border-white/40 hover:border-white hover:bg-white/10 drop-shadow'
             }`}
           >
@@ -116,8 +116,8 @@ export function Header() {
           {/* showCloseButton={false} remove o X automático — usamos nosso próprio no header azul */}
           <SheetContent side="right" className="w-72 bg-white p-0" showCloseButton={false}>
             <div className="flex flex-col h-full">
-              <div className="bg-[#1B4398] p-5 flex items-center justify-between shrink-0">
-                <Image src="/images/logoirineulocacao.png" alt="Irineu Locação" width={110} height={44} className="h-10 w-auto" />
+              <div className="bg-[#1C3E77] p-5 flex items-center justify-between shrink-0">
+                <Image src="/images/logo-irineu-branco.png" alt="Irineu Locação" width={617} height={531} className="h-20 w-auto" />
                 <button onClick={() => setOpen(false)} className="text-white p-1 hover:text-blue-200 transition-colors" aria-label="Fechar menu">
                   <X size={22} />
                 </button>
@@ -128,7 +128,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="text-[#1E293B] font-medium py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-[#1B4398] transition-colors"
+                    className="text-[#1E293B] font-medium py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-[#1C3E77] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -136,7 +136,7 @@ export function Header() {
               </nav>
               <div className="p-4 border-t flex flex-col gap-3 shrink-0">
                 <a href="tel:4734817707" className="flex items-center gap-2 text-[#1E293B] font-medium py-3 px-4 rounded-lg border hover:bg-gray-50 transition-colors">
-                  <Phone size={16} className="text-[#1B4398]" />
+                  <Phone size={16} className="text-[#1C3E77]" />
                   (47) 3481-7707
                 </a>
                 <a
@@ -145,7 +145,7 @@ export function Header() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-[#1E293B] font-medium py-3 px-4 rounded-lg border hover:bg-gray-50 transition-colors"
                 >
-                  <User size={16} className="text-[#1B4398]" />
+                  <User size={16} className="text-[#1C3E77]" />
                   Área do Cliente
                 </a>
                 <a

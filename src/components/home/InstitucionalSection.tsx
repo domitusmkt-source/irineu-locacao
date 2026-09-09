@@ -36,9 +36,9 @@ export function InstitucionalSection() {
                 className="object-cover object-top"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D2B6B]/25 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D2853]/25 to-transparent" />
               {/* Selo 25+ sobreposto na foto */}
-              <div className="absolute bottom-4 right-4 bg-[#CC2929] text-white rounded-2xl px-5 py-4 shadow-2xl text-center">
+              <div className="absolute bottom-4 right-4 bg-[#E32618] text-white rounded-2xl px-5 py-4 shadow-2xl text-center">
                 <p className="text-3xl font-extrabold leading-none">25+</p>
                 <p className="text-xs font-semibold mt-1 whitespace-nowrap">anos de história</p>
               </div>
@@ -47,20 +47,17 @@ export function InstitucionalSection() {
 
           {/* Texto */}
           <div ref={ref} className="pt-2 md:pt-0">
-            <p className="anim text-[#CC2929] text-xs font-bold uppercase tracking-widest mb-3">Quem somos</p>
+            <p className="anim text-[#E32618] text-xs font-bold uppercase tracking-widest mb-3">Quem somos</p>
             <h2 className="anim text-3xl md:text-4xl font-extrabold text-[#1E293B] mb-5 leading-tight">
               Mais de 25 anos cuidando de quem confia na Irineu
             </h2>
-            <p className="anim text-gray-600 leading-relaxed mb-4 text-sm md:text-base">
+            <p className="anim text-gray-600 leading-relaxed mb-8 text-sm md:text-base">
               Somos referência em locação no Norte de Santa Catarina. Conectamos proprietários e inquilinos com segurança, transparência e atendimento humanizado.
-            </p>
-            <p className="anim text-gray-600 leading-relaxed mb-8 text-sm md:text-base hidden sm:block">
-              Nossa equipe está pronta para encontrar o imóvel certo para você — ou para cuidar do seu patrimônio com a dedicação que ele merece.
             </p>
 
             <div className="anim flex flex-wrap gap-3">
               <div className="bg-white rounded-xl px-4 py-2.5 border border-gray-100 shadow-sm">
-                <span className="text-[#1B4398] font-bold text-sm">CRECI 2959J</span>
+                <span className="text-[#1C3E77] font-bold text-sm">CRECI 11975J</span>
               </div>
               <div className="bg-white rounded-xl px-4 py-2.5 border border-gray-100 shadow-sm">
                 <span className="text-[#1E293B] font-semibold text-sm">Joinville e Norte SC</span>

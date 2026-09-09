@@ -12,7 +12,6 @@ const benefits = [
   'Galpões industriais próximos à BR-280 e ao Porto',
   'Salas no centro de Joinville e Jaraguá do Sul',
   'Contratos flexíveis para seu negócio crescer',
-  'Consultoria especializada em imóveis comerciais',
 ]
 
 export function ComercialSection() {
@@ -41,7 +40,7 @@ export function ComercialSection() {
 
           {/* Texto — esquerda */}
           <div>
-            <p className="anim-fade text-[#CC2929] text-sm font-bold uppercase tracking-widest mb-3">Locação Comercial</p>
+            <p className="anim-fade text-[#E32618] text-sm font-bold uppercase tracking-widest mb-3">Locação Comercial</p>
             <h2 className="anim-fade text-3xl md:text-4xl font-extrabold text-[#1E293B] mb-4 leading-tight">
               O espaço certo para o seu negócio
             </h2>
@@ -52,7 +51,7 @@ export function ComercialSection() {
             <ul className="space-y-3 mb-8">
               {benefits.map((b) => (
                 <li key={b} className="anim-fade flex items-start gap-3 text-gray-700 text-sm">
-                  <CheckCircle2 size={16} className="text-[#CC2929] mt-0.5 shrink-0" />
+                  <CheckCircle2 size={16} className="text-[#E32618] mt-0.5 shrink-0" />
                   {b}
                 </li>
               ))}
@@ -61,13 +60,13 @@ export function ComercialSection() {
             <div className="anim-fade flex flex-wrap gap-3">
               <Link
                 href="/locacao-comercial"
-                className="bg-[#1B4398] hover:bg-[#0D2B6B] text-white font-semibold px-7 py-3.5 rounded-xl transition-colors text-sm"
+                className="bg-[#1C3E77] hover:bg-[#0D2853] text-white font-semibold px-7 py-3.5 rounded-xl transition-colors text-sm"
               >
                 Ver imóveis comerciais
               </Link>
               <Link
                 href="/locacao-comercial?tipo=galpao"
-                className="border border-[#1B4398] text-[#1B4398] hover:bg-blue-50 font-semibold px-7 py-3.5 rounded-xl transition-colors text-sm"
+                className="border border-[#1C3E77] text-[#1C3E77] hover:bg-blue-50 font-semibold px-7 py-3.5 rounded-xl transition-colors text-sm"
               >
                 Galpões
               </Link>
@@ -85,9 +84,9 @@ export function ComercialSection() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0D2B6B]/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D2853]/60 to-transparent" />
               <div className="absolute bottom-4 left-4">
-                <span className="bg-white/90 text-[#1B4398] text-xs font-bold px-3 py-1.5 rounded-lg">Galpão Industrial</span>
+                <span className="bg-white/90 text-[#1C3E77] text-xs font-bold px-3 py-1.5 rounded-lg">Galpão Industrial</span>
               </div>
             </div>
 
@@ -101,7 +100,7 @@ export function ComercialSection() {
                   className="object-cover"
                   sizes="176px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1B4398]/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1C3E77]/80 to-transparent" />
                 <div className="absolute bottom-2 left-2">
                   <span className="text-white text-[10px] font-bold">Sala Comercial</span>
                 </div>
@@ -109,7 +108,7 @@ export function ComercialSection() {
             </div>
 
             {/* Stats pill */}
-            <div className="absolute -top-4 -left-4 md:-left-6 bg-[#CC2929] text-white rounded-2xl px-4 py-3 shadow-xl text-center">
+            <div className="absolute -top-4 -left-4 md:-left-6 bg-[#E32618] text-white rounded-2xl px-4 py-3 shadow-xl text-center">
               <p className="text-2xl font-extrabold leading-none">50+</p>
               <p className="text-[10px] font-semibold mt-0.5 whitespace-nowrap">imóveis comerciais</p>
             </div>

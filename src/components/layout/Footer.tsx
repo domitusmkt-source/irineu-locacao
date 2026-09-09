@@ -25,9 +25,9 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-[#0D2B6B] text-white">
+    <footer className="bg-[#0D2853] text-white">
       {/* CTA faixa */}
-      <div className="bg-[#1B4398] py-8">
+      <div className="bg-[#1C3E77] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
             <p className="text-xl font-bold">Encontre seu imóvel ideal</p>
@@ -36,7 +36,7 @@ export function Footer() {
           <div className="flex gap-3">
             <Link
               href="/imoveis"
-              className="bg-white text-[#1B4398] font-semibold px-6 py-2.5 rounded-lg hover:bg-blue-50 transition-colors text-sm"
+              className="bg-white text-[#1C3E77] font-semibold px-6 py-2.5 rounded-lg hover:bg-blue-50 transition-colors text-sm"
             >
               Ver Imóveis
             </Link>
@@ -55,21 +55,21 @@ export function Footer() {
       {/* Main footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Logo + desc */}
-        <div className="lg:col-span-1">
-          <div className="mb-4">
+        <div className="lg:col-span-1 text-center md:text-left">
+          <div className="mb-5 flex justify-center md:justify-start">
             <Image
-              src="/images/logoirineulocacao.png"
+              src="/images/logo-irineu-branco.png"
               alt="Irineu Locação de Imóveis"
-              width={140}
-              height={56}
-              className="h-14 w-auto rounded-xl"
+              width={617}
+              height={531}
+              className="h-20 md:h-24 w-auto"
             />
           </div>
           <p className="text-blue-200 text-sm leading-relaxed mb-4">
             Referência em locação de imóveis em Joinville e Norte de SC há mais de 25 anos.
           </p>
-          <p className="text-blue-300 text-xs font-semibold mb-4">CRECI 2959J</p>
-          <div className="flex gap-3">
+          <p className="text-blue-300 text-xs font-semibold mb-4">CRECI 11975J</p>
+          <div className="flex justify-center md:justify-start gap-3">
             <a
               href={IG_URL}
               target="_blank"
@@ -158,6 +158,19 @@ export function Footer() {
             <p className="text-blue-200 text-xs">Seg–Sex: 08h às 18h</p>
             <p className="text-blue-200 text-xs">Sáb (plantão comercial): 08:30h às 12h</p>
           </div>
+        </div>
+      </div>
+
+      {/* Slogan oficial da marca — assinatura institucional do footer */}
+      <div className="border-t border-white/10 py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-center">
+          <Image
+            src="/images/slogan-irineu-branco.png"
+            alt="Se é da Irineu, pode confiar"
+            width={850}
+            height={347}
+            className="w-56 sm:w-64 md:w-72 h-auto"
+          />
         </div>
       </div>
 

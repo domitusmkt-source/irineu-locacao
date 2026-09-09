@@ -73,7 +73,7 @@ export function GaleriaDetalheImovel({ fotos, titulo, alturaClassName, children 
                 type="button"
                 onClick={() => setAtiva(i)}
                 className={`relative aspect-square rounded-lg overflow-hidden bg-gray-100 transition-all lg:aspect-auto lg:w-32 lg:h-24 lg:shrink-0 ${
-                  ativa === i ? 'ring-2 ring-[#1B4398] ring-offset-2' : 'opacity-90 hover:opacity-100'
+                  ativa === i ? 'ring-2 ring-[#1C3E77] ring-offset-2' : 'opacity-90 hover:opacity-100'
                 }`}
                 aria-label={`Ver foto ${i + 1}`}
                 aria-current={ativa === i}
