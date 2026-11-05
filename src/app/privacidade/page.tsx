@@ -1,9 +1,10 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/site'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Política de Privacidade',
   description: 'Política de Privacidade da Irineu Locação de Imóveis em conformidade com a LGPD.',
-}
+  path: '/privacidade',
+})
 
 export default function PrivacidadePage() {
   return (
@@ -16,7 +17,7 @@ export default function PrivacidadePage() {
           <section>
             <h2 className="text-xl font-bold text-[#1E293B] mb-3">1. Quem somos</h2>
             <p className="text-gray-600 leading-relaxed">
-              A <strong>Irineu Locação de Imóveis</strong> (CRECI 11975J), com sede na Rua Nove de Março, 277 - Centro, Joinville - SC, é a controladora dos dados pessoais coletados por meio deste site. Estamos comprometidos com a proteção dos seus dados em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018).
+              A <strong>Irineu Locação de Imóveis</strong> (CRECI 11975J), com sede na Rua Nove de Março, 317 - Ed. Le Pont - Centro, Joinville - SC, é a controladora dos dados pessoais coletados por meio deste site. Estamos comprometidos com a proteção dos seus dados em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD — Lei nº 13.709/2018).
             </p>
           </section>
 
@@ -86,7 +87,7 @@ export default function PrivacidadePage() {
             <div className="mt-3 bg-[#F4F6F9] rounded-xl p-4 text-gray-700 text-sm">
               <p><strong>E-mail:</strong> privacidade@irineulocacao.com.br</p>
               <p><strong>Telefone:</strong> (47) 3000-0000</p>
-              <p><strong>Endereço:</strong> Rua Nove de Março, 277 - Centro, Joinville - SC, 89201-000</p>
+              <p><strong>Endereço:</strong> Rua Nove de Março, 317 - Ed. Le Pont - Centro, Joinville - SC</p>
             </div>
           </section>
 

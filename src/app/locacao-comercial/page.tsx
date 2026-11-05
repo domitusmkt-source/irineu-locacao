@@ -1,17 +1,15 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Building2, ArrowRight } from 'lucide-react'
 import { getImoveisComerciais } from '@/lib/api/simob'
 import { CardImovel } from '@/components/imoveis/CardImovel'
+import { pageMetadata } from '@/lib/site'
 
-export const metadata: Metadata = {
-  title: 'Locação Comercial — Salas, Galpões e Imóveis Comerciais | Irineu Locação',
-  description: 'Salas comerciais, galpões e imóveis para empresas em Joinville e Norte de Santa Catarina. Locação comercial com suporte especializado.',
-  openGraph: {
-    title: 'Locação Comercial | Irineu Locação de Imóveis',
-    description: 'Salas comerciais e galpões para alugar no Norte de SC.',
-  },
-}
+export const metadata = pageMetadata({
+  title: 'Salas Comerciais e Galpões para Alugar em Joinville e Araquari',
+  description:
+    'Salas comerciais, galpões e imóveis para empresas em Joinville, Araquari e região. Locação comercial com suporte especializado da Irineu Locação.',
+  path: '/locacao-comercial',
+})
 
 const WA_URL = 'https://api.whatsapp.com/send?phone=554734817707&text=Olá! Tenho interesse em imóveis comerciais para locação.'
 

@@ -45,7 +45,7 @@ export function HeroSection() {
           </h1>
 
           <p className="hero-anim text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl">
-            Encontre o imóvel ideal para morar ou para o seu negócio em Santa Catarina.
+            Encontre o imóvel ideal para morar ou para o seu negócio em Joinville, Araquari e região.
           </p>
 
           <div className="hero-anim">

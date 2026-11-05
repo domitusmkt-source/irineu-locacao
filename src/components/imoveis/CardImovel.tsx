@@ -36,7 +36,7 @@ export function CardImovel({ imovel }: CardImovelProps) {
       <Link href={`/imoveis/${imovel.id}`} className="relative block aspect-video overflow-hidden bg-gray-100">
         <Image
           src={imovel.fotos[0]}
-          alt={imovel.titulo}
+          alt={`${imovel.titulo} para alugar em ${imovel.cidade}`}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

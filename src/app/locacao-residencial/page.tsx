@@ -1,17 +1,15 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Home, ArrowRight } from 'lucide-react'
 import { getImoveisResidenciais } from '@/lib/api/simob'
 import { CardImovel } from '@/components/imoveis/CardImovel'
+import { pageMetadata } from '@/lib/site'
 
-export const metadata: Metadata = {
-  title: 'Locação Residencial — Casas, Apartamentos e Terrenos | Irineu Locação',
-  description: 'Encontre casas, apartamentos e terrenos para alugar em Joinville e Norte de Santa Catarina. Locação residencial com atendimento especializado.',
-  openGraph: {
-    title: 'Locação Residencial | Irineu Locação de Imóveis',
-    description: 'Casas, apartamentos e terrenos para alugar no Norte de SC.',
-  },
-}
+export const metadata = pageMetadata({
+  title: 'Casas e Apartamentos para Alugar em Joinville e Araquari',
+  description:
+    'Aluguel de casas, apartamentos, kitnets e terrenos em Joinville, Araquari e região. Locação residencial com atendimento especializado da Irineu Locação.',
+  path: '/locacao-residencial',
+})
 
 const WA_URL = 'https://api.whatsapp.com/send?phone=554734817707&text=Olá! Tenho interesse em imóveis residenciais para locação.'
 

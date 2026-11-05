@@ -9,6 +9,68 @@ import { InstitucionalSection } from '@/components/home/InstitucionalSection'
 import { CTAFinalSection } from '@/components/home/CTAFinalSection'
 import { SloganSection } from '@/components/home/SloganSection'
 import { getImoveisDestaque, getImoveisResidenciais } from '@/lib/api/simob'
+import { CONTATO, DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL, absoluteUrl, jsonLd, pageMetadata } from '@/lib/site'
+
+export const metadata = pageMetadata({
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  path: '/',
+  absoluteTitle: true,
+})
+
+// Somente dados já exibidos no site (rodapé/política de privacidade).
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'RealEstateAgent',
+      '@id': `${SITE_URL}/#organizacao`,
+      name: SITE_NAME,
+      alternateName: 'Irineu Locação',
+      url: absoluteUrl('/'),
+      logo: absoluteUrl('/images/logo-irineu.png'),
+      image: absoluteUrl('/images/og-irineu.jpg'),
+      description: DEFAULT_DESCRIPTION,
+      telephone: CONTATO.telefone,
+      email: CONTATO.email,
+      sameAs: [CONTATO.instagram],
+      identifier: CONTATO.creci,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'R. Nove de Março, 317 - Ed. Le Pont - Centro',
+        addressLocality: 'Joinville',
+        addressRegion: 'SC',
+        addressCountry: 'BR',
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Joinville' },
+        { '@type': 'City', name: 'Araquari' },
+      ],
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '08:00',
+          closes: '18:00',
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: 'Saturday',
+          opens: '08:30',
+          closes: '12:00',
+        },
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: absoluteUrl('/'),
+      name: SITE_NAME,
+      inLanguage: 'pt-BR',
+      publisher: { '@id': `${SITE_URL}/#organizacao` },
+    },
+  ],
+}
 
 export default async function HomePage() {
   // Se a API Simob estiver indisponível, a seção de destaques simplesmente
@@ -18,6 +80,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }} />
       <HeroSection />
       <TrustBar />
       <TiposImovelSection />

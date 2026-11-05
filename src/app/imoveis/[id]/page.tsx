@@ -1,8 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { getImovelById, getImoveisSimilares } from '@/lib/api/simob'
 import { GaleriaDetalheImovel } from '@/components/imoveis/GaleriaDetalheImovel'
+import type { Imovel } from '@/types/imovel'
+import { SITE_URL, absoluteUrl, jsonLd, pageMetadata } from '@/lib/site'
 
 const tipoLabel: Record<string, string> = {
   apartamento: 'Apartamento',
@@ -26,31 +29,69 @@ function formatPrecoDetalhado(valor: number) {
   return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
+function resumir(texto: string, limite = 155): string {
+  const limpo = texto.replace(/\s+/g, ' ').trim()
+  if (limpo.length <= limite) return limpo
+  return `${limpo.slice(0, limite).replace(/\s+\S*$/, '')}…`
+}
+
+function descricaoMeta(imovel: Imovel): string {
+  const base = `Aluguel em ${imovel.bairro}, ${imovel.cidade} - SC · ${imovel.area} m² · ${formatPreco(imovel.preco)}/mês.`
+  return imovel.descricao ? resumir(`${base} ${imovel.descricao}`) : resumir(`${base} Fale com a Irineu Locação.`)
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const imovel = await getImovelById(id)
+  if (!imovel) return { title: 'Imóvel não encontrado', robots: { index: false, follow: true } }
+
+  const foto = imovel.fotos[0]
+  return pageMetadata({
+    // Código Simob no título: unidades do mesmo prédio têm o mesmo `titulo`.
+    title: `${imovel.titulo} (Cód. ${imovel.codigoSimob ?? imovel.id}) para alugar em ${imovel.cidade}`,
+    description: descricaoMeta(imovel),
+    path: `/imoveis/${imovel.id}`,
+    images: foto?.startsWith('http') ? [{ url: foto, alt: imovel.titulo }] : undefined,
+  })
+}
+
 export default async function ImovelPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const imovel = await getImovelById(id)
-  if (!imovel) redirect('/imoveis')
+  // 404 real (com noindex) para imóvel removido/alugado, em vez de redirecionar
+  // para a listagem — redirect para página genérica é tratado como soft 404.
+  if (!imovel) notFound()
 
   const similares = await getImoveisSimilares(imovel, 3).catch(() => [])
   const totalEncargos = imovel.encargos.reduce((soma, e) => soma + e.valor, 0)
   const waText = encodeURIComponent(
     `Olá! Tenho interesse no imóvel: ${imovel.titulo} (${imovel.codigoSimob}) - ${imovel.bairro}, ${imovel.cidade}. Poderia me dar mais informações?`
   )
-  const waUrl = `https://wa.me/5547348177073?text=${waText}`
+  const waUrl = `https://wa.me/554734817707?text=${waText}`
   const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(imovel.endereco + ', ' + imovel.cidade + ', SC')}`
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Início', item: absoluteUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Imóveis', item: absoluteUrl('/imoveis') },
+      { '@type': 'ListItem', position: 3, name: imovel.titulo, item: `${SITE_URL}/imoveis/${imovel.id}` },
+    ],
+  }
 
   return (
-    <main className="bg-white min-h-screen pt-24 md:pt-28">
+    <div className="bg-white min-h-screen pt-24 md:pt-28">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumb) }} />
 
       {/* Breadcrumb */}
       <div className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-2 text-sm text-gray-500">
+        <nav aria-label="Navegação estrutural" className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-2 text-sm text-gray-500">
           <Link href="/" className="hover:text-[#1C3E77]">Início</Link>
           <span>/</span>
           <Link href="/imoveis" className="hover:text-[#1C3E77]">Imóveis</Link>
           <span>/</span>
           <span className="text-gray-800 font-medium truncate max-w-xs">{imovel.titulo}</span>
-        </div>
+        </nav>
       </div>
 
       {/* Hero + galeria */}
@@ -324,6 +365,6 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
         </div>
       )}
 
-    </main>
+    </div>
   )
 }

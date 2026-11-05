@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/site'
 import Link from 'next/link'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Política de Cookies',
   description: 'Política de Cookies do site Irineu Locação de Imóveis.',
-}
+  path: '/cookies',
+})
 
 export default function CookiesPage() {
   return (
