@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   env: {
     NETLIFY_CONTEXT: process.env.CONTEXT || "",
   },
+  // Build "standalone" só para a hospedagem Node.js (cPanel): ativado pelo
+  // script `npm run build:standalone`. Na Netlify a variável não existe e o
+  // build continua exatamente como antes.
+  ...(process.env.NEXT_OUTPUT === "standalone" && { output: "standalone" as const }),
   poweredByHeader: false,
   images: {
     remotePatterns: [
