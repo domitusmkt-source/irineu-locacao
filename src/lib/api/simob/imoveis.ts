@@ -4,6 +4,7 @@ import { FINALIDADE_LOCACAO, MAX_RESULTS_LISTAGEM } from './config'
 import { SimobApiError, simobGet, simobPost } from './http'
 import { mapDetalheToImovel, mapListagemToImovel } from './mapper'
 import type { SimobImovelDetalhe, SimobImovelListagem } from './types'
+import { selecionarSimilares } from '@/lib/imovel-similares'
 
 export { filtrarImoveis } from './filtro'
 
@@ -71,7 +72,5 @@ export async function getImovelById(codigo: string): Promise<Imovel | undefined>
 
 export async function getImoveisSimilares(imovel: Imovel, limit = 3): Promise<Imovel[]> {
   const todos = await listImoveisDisponiveis()
-  return todos
-    .filter((i) => i.id !== imovel.id && (i.tipo === imovel.tipo || i.cidade === imovel.cidade))
-    .slice(0, limit)
+  return selecionarSimilares(imovel, todos, limit)
 }

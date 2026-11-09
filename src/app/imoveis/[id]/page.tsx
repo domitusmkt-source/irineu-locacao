@@ -6,6 +6,7 @@ import { getImovelById, getImoveisSimilares } from '@/lib/api/simob'
 import { GaleriaDetalheImovel } from '@/components/imoveis/GaleriaDetalheImovel'
 import type { Imovel } from '@/types/imovel'
 import { SITE_URL, absoluteUrl, jsonLd, pageMetadata } from '@/lib/site'
+import { formatarArea, nomeEmpreendimento, tituloImovel } from '@/lib/imovel-texto'
 
 const tipoLabel: Record<string, string> = {
   apartamento: 'Apartamento',
@@ -36,7 +37,14 @@ function resumir(texto: string, limite = 155): string {
 }
 
 function descricaoMeta(imovel: Imovel): string {
-  const base = `Aluguel em ${imovel.bairro}, ${imovel.cidade} - SC · ${imovel.area} m² · ${formatPreco(imovel.preco)}/mês.`
+  const area = formatarArea(imovel.area)
+  const base = [
+    `Aluguel em ${imovel.bairro}, ${imovel.cidade} - SC`,
+    area && `${area} m²`,
+    `${formatPreco(imovel.preco)}/mês.`,
+  ]
+    .filter(Boolean)
+    .join(' · ')
   return imovel.descricao ? resumir(`${base} ${imovel.descricao}`) : resumir(`${base} Fale com a Irineu Locação.`)
 }
 
@@ -47,8 +55,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   const foto = imovel.fotos[0]
   return pageMetadata({
-    // Código Simob no título: unidades do mesmo prédio têm o mesmo `titulo`.
-    title: `${imovel.titulo} (Cód. ${imovel.codigoSimob ?? imovel.id}) para alugar em ${imovel.cidade}`,
+    // Tipo + "para alugar" + cidade/bairro primeiro (o que o Google exibe antes de
+    // truncar); código Simob no fim porque unidades do mesmo prédio têm o mesmo texto.
+    title: `${tituloImovel(imovel)} (Cód. ${imovel.codigoSimob ?? imovel.id})`,
     description: descricaoMeta(imovel),
     path: `/imoveis/${imovel.id}`,
     images: foto?.startsWith('http') ? [{ url: foto, alt: imovel.titulo }] : undefined,
@@ -64,6 +73,10 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
 
   const similares = await getImoveisSimilares(imovel, 3).catch(() => [])
   const totalEncargos = imovel.encargos.reduce((soma, e) => soma + e.valor, 0)
+  const h1 = tituloImovel(imovel)
+  const empreendimento = nomeEmpreendimento(imovel)
+  // Área 0 = não informada na Simob: o card é omitido em vez de exibir "0 m²".
+  const area = formatarArea(imovel.area)
   const waText = encodeURIComponent(
     `Olá! Tenho interesse no imóvel: ${imovel.titulo} (${imovel.codigoSimob}) - ${imovel.bairro}, ${imovel.cidade}. Poderia me dar mais informações?`
   )
@@ -105,8 +118,10 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
             <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 ${TIPO_BADGE_CLASS}`}>
               {tipoLabel[imovel.tipo] ?? imovel.tipo}
             </span>
-            <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold drop-shadow">{imovel.titulo}</h1>
-            <p className="text-white/80 text-sm mt-1">{imovel.bairro}, {imovel.cidade} — SC</p>
+            <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-extrabold drop-shadow">{h1}</h1>
+            <p className="text-white/80 text-sm mt-1">
+              {empreendimento && `${empreendimento} · `}{imovel.bairro}, {imovel.cidade} — SC
+            </p>
           </div>
           <div className="hidden sm:block bg-white/95 rounded-2xl px-5 py-3 text-right shadow-lg shrink-0">
             <p className="text-xs text-gray-500 font-medium">Aluguel mensal</p>
@@ -147,10 +162,12 @@ export default async function ImovelPage({ params }: { params: Promise<{ id: str
 
             {/* Cards de características */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-              <div className="bg-[#F4F6F9] rounded-xl p-4 text-center">
-                <p className="text-2xl font-extrabold text-[#1C3E77]">{imovel.area}</p>
-                <p className="text-xs text-gray-500 mt-1">m² de área</p>
-              </div>
+              {area && (
+                <div className="bg-[#F4F6F9] rounded-xl p-4 text-center">
+                  <p className="text-2xl font-extrabold text-[#1C3E77]">{area}</p>
+                  <p className="text-xs text-gray-500 mt-1">m² de área</p>
+                </div>
+              )}
               {imovel.quartos != null && (
                 <div className="bg-[#F4F6F9] rounded-xl p-4 text-center">
                   <p className="text-2xl font-extrabold text-[#1C3E77]">{imovel.quartos}</p>
