@@ -48,6 +48,17 @@ function descricaoMeta(imovel: Imovel): string {
   return imovel.descricao ? resumir(`${base} ${imovel.descricao}`) : resumir(`${base} Fale com a Irineu Locação.`)
 }
 
+// ISR: cada imóvel é gerado no primeiro acesso (nenhum no build, para não
+// depender da Simob durante o deploy) e servido do cache; a cada 5 min o próximo
+// acesso dispara a regeneração em segundo plano — mesmo intervalo do cache das
+// chamadas Simob (http.ts) e do sitemap. Imóvel removido na Simob vira 404 na
+// regeneração; falha temporária da Simob mantém a última versão válida.
+export const revalidate = 300
+
+export async function generateStaticParams() {
+  return []
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const imovel = await getImovelById(id)
