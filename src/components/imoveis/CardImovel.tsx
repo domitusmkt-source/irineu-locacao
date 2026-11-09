@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { MapPin, BedDouble, Car, Maximize2, MessageCircle } from 'lucide-react'
 import { Imovel } from '@/types/imovel'
+import { formatarArea } from '@/lib/imovel-texto'
 
 const TIPO_BADGE_CLASS = 'bg-[#1C3E77] text-white'
 
@@ -24,6 +25,8 @@ interface CardImovelProps {
 }
 
 export function CardImovel({ imovel }: CardImovelProps) {
+  // Área 0 = não informada na Simob: omitida em vez de exibir "0 m²".
+  const area = formatarArea(imovel.area)
   const waMsg = encodeURIComponent(`Olá! Tenho interesse no imóvel: ${imovel.titulo} - ${imovel.cidade}/${imovel.bairro}. Código: ${imovel.id}`)
 
   return (
@@ -85,10 +88,12 @@ export function CardImovel({ imovel }: CardImovelProps) {
               <span>{imovel.vagas}</span>
             </div>
           )}
-          <div className="flex items-center gap-1">
-            <Maximize2 size={14} />
-            <span>{imovel.area} m²</span>
-          </div>
+          {area && (
+            <div className="flex items-center gap-1">
+              <Maximize2 size={14} />
+              <span>{area} m²</span>
+            </div>
+          )}
         </div>
 
         {/* Botões */}

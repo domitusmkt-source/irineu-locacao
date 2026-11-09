@@ -22,11 +22,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/cookies`, changeFrequency: 'yearly', priority: 0.2 },
   ]
 
-  // Se a Simob estiver fora do ar, publica ao menos as páginas institucionais.
-  const imoveis = await listImoveisDisponiveis().catch((error) => {
-    console.error('[sitemap] falha ao consultar a Simob API:', error)
-    return []
-  })
+  // Sem catch de propósito: se a Simob falhar na revalidação, o erro faz o Next
+  // continuar servindo o último sitemap válido (completo) em vez de publicar
+  // uma versão só com as páginas institucionais.
+  const imoveis = await listImoveisDisponiveis()
 
   return [
     ...paginas,

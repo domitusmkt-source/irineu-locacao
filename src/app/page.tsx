@@ -73,10 +73,11 @@ const structuredData = {
 }
 
 export default async function HomePage() {
-  // Se a API Simob estiver indisponível, a seção de destaques simplesmente
-  // renderiza sem cards em vez de quebrar a Home inteira.
+  // Destaques são secundários (e aleatórios): se só essa chamada falhar, a seção
+  // renderiza sem cards. A listagem principal fica sem catch de propósito: se a
+  // Simob falhar na revalidação, o Next mantém a última Home válida em cache.
   const destaque = await getImoveisDestaque().catch(() => [])
-  const residenciais = await getImoveisResidenciais().catch(() => [])
+  const residenciais = await getImoveisResidenciais()
 
   return (
     <>

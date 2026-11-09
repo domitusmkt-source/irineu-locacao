@@ -1,9 +1,10 @@
 import { cache } from 'react'
 import type { Imovel } from '@/types/imovel'
 import { FINALIDADE_LOCACAO, MAX_RESULTS_LISTAGEM } from './config'
-import { simobGet, simobPost } from './http'
+import { SimobApiError, simobGet, simobPost } from './http'
 import { mapDetalheToImovel, mapListagemToImovel } from './mapper'
 import type { SimobImovelDetalhe, SimobImovelListagem } from './types'
+import { selecionarSimilares } from '@/lib/imovel-similares'
 
 export { filtrarImoveis } from './filtro'
 
@@ -40,7 +41,22 @@ export async function getImoveisComerciais(): Promise<Imovel[]> {
   return todos.filter((i) => i.categoria === 'comercial')
 }
 
-/** Busca um imóvel pelo código retornado pela API (usado em /imoveis/[id]). */
+/**
+ * A Simob informa imóvel inexistente/indisponível respondendo normalmente com
+ * `success:false` (HTTP 202, "Não foi possivel encontrar o imóvel!"). Um HTTP 404
+ * também é tratado como inexistente, por segurança caso a API passe a usá-lo.
+ */
+function indicaImovelInexistente(error: unknown): boolean {
+  return error instanceof SimobApiError && (error.code === 'REJECTED' || error.status === 404)
+}
+
+/**
+ * Busca um imóvel pelo código retornado pela API (usado em /imoveis/[id]).
+ * Retorna `undefined` só quando a Simob confirma que o imóvel não existe — a
+ * página responde 404 real. Falhas temporárias (rede, timeout, 5xx, 403, resposta
+ * inválida) são relançadas para virar 5xx: assim o Google tenta de novo depois,
+ * em vez de tirar do índice um imóvel válido por causa de uma instabilidade.
+ */
 export async function getImovelById(codigo: string): Promise<Imovel | undefined> {
   try {
     const result = await simobGet<SimobImovelDetalhe[]>(
@@ -48,15 +64,13 @@ export async function getImovelById(codigo: string): Promise<Imovel | undefined>
     )
     const item = result?.[0]
     return item ? mapDetalheToImovel(item) : undefined
-  } catch {
-    // Código inexistente, imóvel indisponível ou API fora do ar: trata como "não encontrado".
-    return undefined
+  } catch (error) {
+    if (indicaImovelInexistente(error)) return undefined
+    throw error
   }
 }
 
 export async function getImoveisSimilares(imovel: Imovel, limit = 3): Promise<Imovel[]> {
   const todos = await listImoveisDisponiveis()
-  return todos
-    .filter((i) => i.id !== imovel.id && (i.tipo === imovel.tipo || i.cidade === imovel.cidade))
-    .slice(0, limit)
+  return selecionarSimilares(imovel, todos, limit)
 }
