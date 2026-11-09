@@ -14,7 +14,9 @@ export const metadata = pageMetadata({
 const WA_URL = 'https://api.whatsapp.com/send?phone=554734817707&text=Olá! Tenho interesse em imóveis comerciais para locação.'
 
 export default async function LocacaoComercialPage() {
-  const imoveis = await getImoveisComerciais().catch(() => [])
+  // Sem catch de propósito: se a Simob falhar na revalidação, o Next continua
+  // servindo a última versão válida em vez de cachear "nenhum imóvel disponível".
+  const imoveis = await getImoveisComerciais()
 
   return (
     <div className="min-h-screen bg-[#F4F6F9]">
